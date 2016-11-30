@@ -5,8 +5,8 @@ use ScriptureAnalytics;
 ---for whatever reason can see the file
 select *
 from openrowset('MSDASQL'
-,'Driver={Microsoft Access Text Driver (*.txt, *.csv)}; DefaultDir=C:\Users\mheil\Desktop\testa;Extended properties="FORMAT=Delimited(|);ColNameHeader=True;"'
-,'select * from testa.csv')
+,'Driver={Microsoft Access Text Driver (*.txt, *.csv)}; DefaultDir=C:\<mydirectory>;Extended properties="FORMAT=Delimited(|);ColNameHeader=True;"'
+,'select * from <filename>.csv')
 
 
  -- To allow advanced options to be changed.  
@@ -23,10 +23,10 @@ RECONFIGURE;
 GO  
 
 --requires table exists
-Exec master.dbo.xp_cmdshell 'BCP ScriptureAnalytics.dbo.Events in "C:\Events_20160914.csv" -S ABS-HEIL\SQLEXPRESS2014 -q -c -t"|" -T'
+Exec master.dbo.xp_cmdshell 'BCP <existing.schema.table> in "C:\<filename>.csv" -S <MACHINE NAME>\<NAMED INSTANCE> -q -c -t"|" -T'
 
 --requires table exist
-BULK INSERT [Events] FROM 'C:\Events20160914.csv'  
+BULK INSERT [Events] FROM 'C:\<filename>.csv'  
    WITH (  
       DATAFILETYPE = 'char',  
       FIELDTERMINATOR = '|',  
@@ -34,17 +34,4 @@ BULK INSERT [Events] FROM 'C:\Events20160914.csv'
 );  
 GO  
 
-
-
-/*
-Criteria:
-US only
-
-fields in question:
-abs_fums_username (email),
-
-fields not used:
-user_ipaddress, geo_latitude, geo_longitude, 
-
-*/
 
