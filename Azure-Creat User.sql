@@ -10,5 +10,5 @@ CREATE USER <username> FROM LOGIN <loginname>
 GRANT ALTER ON SCHEMA::<schemaname> TO <username>
 --Add security role to the user, this HAS TO BE DONE ON THE MASTER DATABASE. Logins and roles are handled there. Right click new query
 --https://msdn.microsoft.com/library/ms189775.aspx.
-ALTER ROLE dbmanager ADD MEMBER teamdesk
+ALTER ROLE dbmanager ADD MEMBER <member>
 -----------------------------------------------------------------------------------------------------------------------------------------------------
