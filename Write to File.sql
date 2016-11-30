@@ -30,7 +30,7 @@ GO
 RECONFIGURE;
 GO
 
-DECLARE @File VARCHAR(2000) = 'C:\Users\mheil\Desktop\myfile.txt'
+DECLARE @File VARCHAR(2000) = '<filepath>\myfile.txt'
 	,@Text VARCHAR(2000) = 'This is the file content. Fill it as you wish'
 
 DECLARE @OLE INT
