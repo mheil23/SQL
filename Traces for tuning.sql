@@ -22,7 +22,7 @@ EXEC sp_trace_setstatus @tid, 2
 --dump trace into a table for instpection if you want
 SELECT *
 INTO inside_sql_trace
-FROM fn_trace_gettable('k:\Traces\ABS_Tuning.trc', 1) --this is j
+FROM fn_trace_gettable('<FilePath>\<filename>.trc', 1) --this is j
 
 
 
@@ -44,7 +44,7 @@ set @maxfilesize = 500
 -- remote server to local drive, please use UNC path and make sure server has
 -- write access to your network share
 --(traceid output, rollover files 0 means no rollover, file location/name, max file size, stop date)
-exec @rc = sp_trace_create @TraceID output, 0, N'K:\Traces\ABS_Tuning', @maxfilesize, NULL 
+exec @rc = sp_trace_create @TraceID output, 0, N'<filePath>\<filename (no extension)>', @maxfilesize, NULL 
 if (@rc != 0) goto error
 
 -- Client side File and Table cannot be scripted
@@ -77,7 +77,7 @@ exec sp_trace_setevent @TraceID, 12, 13, @on
 declare @intfilter int
 declare @bigintfilter bigint
 
-exec sp_trace_setfilter @TraceID, 35, 0, 6, N'ABS'
+exec sp_trace_setfilter @TraceID, 35, 0, 6, N'<database>'
 -- Set the trace status to start
 exec sp_trace_setstatus @TraceID, 1
 
